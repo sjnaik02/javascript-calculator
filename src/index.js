@@ -1,17 +1,30 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import './index.css'
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+class App extends React.Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            buttons: [
+                {name: 'one', value: 1},
+                {name: 'two', value: 2},
+                {name: 'three', value: 3},
+                {name: 'four', value: 4},
+                {name: 'five', value: 5},
+                {name: 'six', value: 6},
+                {name: 'seven', value: 7},
+                {name: 'eight', value: 8},
+                {name: 'nine', value: 9},
+                {name: 'ten', value: 0},
+            ],
+        }
+    }
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+    render(){
+        return(
+            <div> Hello World </div>
+        );
+    }
+}
+ReactDOM.render(<App />, document.getElementById('root'));
