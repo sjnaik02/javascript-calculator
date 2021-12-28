@@ -34,6 +34,7 @@ class App extends React.Component {
             output: '',
         }
         this.handleNumClick = this.handleNumClick.bind(this);
+        this.handleOperatorClick = this.handleOperatorClick.bind(this);
         this.calculate = this.calculate.bind(this);
         this.clear = this.clear.bind(this);
     }
