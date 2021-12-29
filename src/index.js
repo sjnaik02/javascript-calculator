@@ -12,7 +12,7 @@ const nums = [
     { name: 'seven', value: 7 },
     { name: 'eight', value: 8 },
     { name: 'nine', value: 9 },
-    { name: 'ten', value: 0 },
+    { name: 'zero', value: 0 },
     { name: 'decimal', value: '.' }
 ]
 
