@@ -127,7 +127,7 @@ class App extends React.Component {
         return (
             <div className='wrapper'>
                 <h2 id='activeEquation-display'>your equation: {this.state.activeEquation ? this.state.activeEquation : this.state.lastEquation}</h2>
-                <h1 id='display'>input: {this.state.fragment ? this.state.fragment : this.state.lastOperator ? this.state.lastOperator : this.state.output ? this.state.output : 0}</h1>
+                <h1 id='display'> {this.state.fragment ? this.state.fragment : this.state.lastOperator ? this.state.lastOperator : this.state.output ? this.state.output : 0}</h1>
                 {nums.map((item) =>
                     <button id={item.name} onClick={() => this.handleNumClick(item.value)}> {item.value} </button>)
                 }
