@@ -56,7 +56,13 @@ class App extends React.Component {
 
     handleOperatorClick(op) {
         if(this.state.output && true){
-            
+            this.setState((state) => ({
+                fragment: '',
+                lastOperator: op,
+                activeEquation: state.output + op,
+                lastEquation: '',
+                output: '',
+            }));
         }
         else {
             this.setState((state) => ({
