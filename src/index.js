@@ -51,7 +51,7 @@ class App extends React.Component {
                 lastEquation: '',
                 output: '',
             }));
-        } 
+        }
     }
 
     handleOperatorClick(op) {
@@ -64,11 +64,10 @@ class App extends React.Component {
                 output: '',
             }));
         }
-        else { 
-            if(/[+-/*][+-/*]$/.test(this.state.activeEquation))
-            {
+        else {
+            if (/[+-/*][+-/*]$/.test(this.state.activeEquation)) {
 
-            } else if(!/[+-/*]$/.test(this.state.activeEquation) || (/[+-/*]$/.test(this.state.activeEquation) && op === '-')){
+            } else if (!/[+-/*]$/.test(this.state.activeEquation) || (/[+-/*]$/.test(this.state.activeEquation) && op === '-')) {
                 this.setState((state) => ({
                     fragment: '',
                     lastOperator: op,
@@ -77,11 +76,11 @@ class App extends React.Component {
                     output: '',
                 }));
             }
-            else if(/[+-/*]$/.test(this.state.activeEquation) && op !== '-'){
+            else if (/[+-/*]$/.test(this.state.activeEquation) && op !== '-') {
                 this.setState((state) => ({
                     fragment: '',
                     lastOperator: op,
-                    activeEquation: state.activeEquation.slice(0,state.activeEquation.length-1) + op,
+                    activeEquation: state.activeEquation.slice(0, state.activeEquation.length - 1) + op,
                     lastEquation: '',
                     output: '',
                 }));
@@ -128,7 +127,7 @@ class App extends React.Component {
         return (
             <div className='wrapper'>
                 <h2 id='activeEquation-display'>your equation: {this.state.activeEquation ? this.state.activeEquation : this.state.lastEquation}</h2>
-                <h1 id='display'>input: {this.state.fragment ? this.state.fragment : this.state.lastOperator ? this.state.lastOperator : this.state.output}</h1>
+                <h1 id='display'>input: {this.state.fragment ? this.state.fragment : this.state.lastOperator ? this.state.lastOperator : this.state.output ? this.state.output : 0}</h1>
                 {nums.map((item) =>
                     <button id={item.name} onClick={() => this.handleNumClick(item.value)}> {item.value} </button>)
                 }
