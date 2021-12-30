@@ -56,7 +56,7 @@ class App extends React.Component {
 
     handleOperatorClick(op) {
         if(this.state.output && true){
-
+            
         }
         else {
             this.setState((state) => ({
