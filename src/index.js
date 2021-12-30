@@ -29,7 +29,7 @@ class App extends React.Component {
         this.state = {
             fragment: '',
             activeEquation: '',
-            lastEquation: '',
+            lastEquation: '0',
             lastOperator: '',
             output: '',
         }
@@ -40,37 +40,62 @@ class App extends React.Component {
     }
 
     handleNumClick(num) {
-        this.setState((state) => ({
-            fragment: state.fragment + num,
-            lastOperator: '',
-            activeEquation: state.activeEquation + num,
-            lastEquation: '',
-            output: '',
-        }));
+        const regex1 = /[.]/;
+        const regex2 = /^00/;
+        if (regex1.test(this.state.activeEquation) && num === '.') { }
+        else if(!regex2.test(this.state.fragment+num)){
+            this.setState((state) => ({
+                fragment: state.fragment + num,
+                lastOperator: '',
+                activeEquation: state.activeEquation + num,
+                lastEquation: '',
+                output: '',
+            }));
+        }
     }
 
     handleOperatorClick(op) {
-        this.setState((state) => ({
-            fragment: '',
-            lastOperator: op,
-            activeEquation: state.activeEquation + op,
-            lastEquation: '',
-            output: '',
-        }));
+        if(this.state.output && true){
+
+        }
+        else {
+            this.setState((state) => ({
+                fragment: '',
+                lastOperator: op,
+                activeEquation: state.activeEquation + op,
+                lastEquation: '',
+                output: '',
+            }));
+        }
     }
 
     calculate() {
+        var evaluate = '';
+        if(/^[/*]/.test(this.state.activeEquation)){
+            evaluate = this.state.activeEquation.slice(1);
+        }
+        if(/[/*+-]$/.test(this.state.activeEquation)){
+            if(/[/*+-]+$/.test(this.state.activeEquation)){
+                evaluate = this.state.activeEquation.slice(0,this.state.activeEquation.length-2);
+            }
+            else{
+                evaluate = this.state.activeEquation.slice(0,this.state.activeEquation.length-1);
+                console.log(evaluate);
+            }
+        }else{
+            evaluate = this.state.activeEquation;
+        }
         this.setState((state) => ({
             lastOperator: '',
             fragment: '',
             activeEquation: '',
             lastEquation: state.activeEquation,
-            output: eval(state.activeEquation),
+            output: eval(evaluate),
         }));
     }
 
     clear() {
-        this.setState((state) => ({
+        this.setState(() => ({
             lastOperator: '',
             fragment: '',
             activeEquation: '',
