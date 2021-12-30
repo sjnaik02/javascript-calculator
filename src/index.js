@@ -42,7 +42,7 @@ class App extends React.Component {
     handleNumClick(num) {
         const regex1 = /[.]/;
         const regex2 = /^00/;
-        if (regex1.test(this.state.activeEquation) && num === '.') { }
+        if (regex1.test(this.state.fragment) && num === '.') { }
         else if (!regex2.test(this.state.fragment + num)) {
             this.setState((state) => ({
                 fragment: state.fragment + num,
@@ -66,25 +66,33 @@ class App extends React.Component {
         }
         else {
             if (/[+-/*][+-/*]$/.test(this.state.activeEquation)) {
-
-            } else if (!/[+-/*]$/.test(this.state.activeEquation) || (/[+-/*]$/.test(this.state.activeEquation) && op === '-')) {
                 this.setState((state) => ({
-                    fragment: '',
+                    fragment: "",
+                    lastOperator: op,
+                    activeEquation:
+                        state.activeEquation.slice(0, state.activeEquation.length - 2) + op,
+                    lastEquation: "",
+                    output: ""
+                }));
+            } else if (!/[+-/*]$/.test(this.state.activeEquation) || (/[+-/*]$/.test(this.state.activeEquation) && op === "-")) {
+                this.setState((state) => ({
+                    fragment: "",
                     lastOperator: op,
                     activeEquation: state.activeEquation + op,
-                    lastEquation: '',
-                    output: '',
+                    lastEquation: "",
+                    output: ""
                 }));
-            }
-            else if (/[+-/*]$/.test(this.state.activeEquation) && op !== '-') {
+            } else if ((/[+-/*]$/.test(this.state.activeEquation) && op !== "-")) {
                 this.setState((state) => ({
-                    fragment: '',
+                    fragment: "",
                     lastOperator: op,
-                    activeEquation: state.activeEquation.slice(0, state.activeEquation.length - 1) + op,
-                    lastEquation: '',
-                    output: '',
+                    activeEquation:
+                        state.activeEquation.slice(0, state.activeEquation.length - 1) + op,
+                    lastEquation: "",
+                    output: ""
                 }));
             }
+
         }
     }
 
