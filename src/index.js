@@ -43,7 +43,7 @@ class App extends React.Component {
         const regex1 = /[.]/;
         const regex2 = /^00/;
         if (regex1.test(this.state.activeEquation) && num === '.') { }
-        else if(!regex2.test(this.state.fragment+num)){
+        else if (!regex2.test(this.state.fragment + num)) {
             this.setState((state) => ({
                 fragment: state.fragment + num,
                 lastOperator: '',
@@ -51,11 +51,11 @@ class App extends React.Component {
                 lastEquation: '',
                 output: '',
             }));
-        }
+        } 
     }
 
     handleOperatorClick(op) {
-        if(this.state.output && true){
+        if (this.state.output && true) {
             this.setState((state) => ({
                 fragment: '',
                 lastOperator: op,
@@ -64,31 +64,45 @@ class App extends React.Component {
                 output: '',
             }));
         }
-        else {
-            this.setState((state) => ({
-                fragment: '',
-                lastOperator: op,
-                activeEquation: state.activeEquation + op,
-                lastEquation: '',
-                output: '',
-            }));
+        else { 
+            if(/[+-/*][+-/*]$/.test(this.state.activeEquation))
+            {
+
+            } else if(!/[+-/*]$/.test(this.state.activeEquation) || (/[+-/*]$/.test(this.state.activeEquation) && op === '-')){
+                this.setState((state) => ({
+                    fragment: '',
+                    lastOperator: op,
+                    activeEquation: state.activeEquation + op,
+                    lastEquation: '',
+                    output: '',
+                }));
+            }
+            else if(/[+-/*]$/.test(this.state.activeEquation) && op !== '-'){
+                this.setState((state) => ({
+                    fragment: '',
+                    lastOperator: op,
+                    activeEquation: state.activeEquation.slice(0,state.activeEquation.length-1) + op,
+                    lastEquation: '',
+                    output: '',
+                }));
+            }
         }
     }
 
     calculate() {
         var evaluate = '';
-        if(/^[/*]/.test(this.state.activeEquation)){
+        if (/^[/*]/.test(this.state.activeEquation)) {
             evaluate = this.state.activeEquation.slice(1);
         }
-        if(/[/*+-]$/.test(this.state.activeEquation)){
-            if(/[/*+-]+$/.test(this.state.activeEquation)){
-                evaluate = this.state.activeEquation.slice(0,this.state.activeEquation.length-2);
+        if (/[/*+-]$/.test(this.state.activeEquation)) {
+            if (/[/*+-]+$/.test(this.state.activeEquation)) {
+                evaluate = this.state.activeEquation.slice(0, this.state.activeEquation.length - 2);
             }
-            else{
-                evaluate = this.state.activeEquation.slice(0,this.state.activeEquation.length-1);
+            else {
+                evaluate = this.state.activeEquation.slice(0, this.state.activeEquation.length - 1);
                 console.log(evaluate);
             }
-        }else{
+        } else {
             evaluate = this.state.activeEquation;
         }
         this.setState((state) => ({
